@@ -8,8 +8,8 @@ jobs:
     Nombre_Trabajo:
         runs-on: ubuntu-20.04
         steps:
-        - name: Echo the message
+        - name: Mostrar mensaje
           run: echo "hola mundo"
-        - name: Echo the message
+        - name: Dime la fecha
           run: date
         - run: ls -l
