@@ -1,12 +1,12 @@
-name: Say hello
+name: Nombre_Workflow
 
 on:
     push:
         branches:
         - master
 jobs:
-    hello_woild:
-            runs-on: ubuntu-18.04
-            steps:
-            - name: Echo the message
-              run: echo "hola mundo"
+    Nombre_Trabajo:
+        runs-on: ubuntu-18.04
+        steps:
+        - name: Echo the message
+          run: echo "hola mundo"
