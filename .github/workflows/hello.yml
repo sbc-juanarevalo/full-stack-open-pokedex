@@ -3,10 +3,10 @@ name: Say hello
 on:
     push:
         branches:
-        -   main
+        - master
 jobs:
     hello_woild:
             runs-on: ubuntu-18.04
             steps:
-            -   name: Echo the message
-                run: echo "hola mundo"
+            - name: Echo the message
+              run: echo "hola mundo"
