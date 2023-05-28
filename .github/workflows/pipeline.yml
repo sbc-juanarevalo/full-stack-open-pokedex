@@ -10,10 +10,10 @@ jobs:
         steps:
         - name: Mostrar mensaje
           run: echo "Iniciando.."
-        - uses: actions/checkout@v3
+        - uses: actions/checkout@v2
           with:
             fetch-depth: 0
-        - uses: actions/setup-node@v3
+        - uses: actions/setup-node@v2
           with:
             node-version: 16
         - name: Install dependencies
