@@ -24,6 +24,8 @@ jobs:
           run: npm run build
         - name: Test
           run: npm run test
+        - name: Fix cypress
+          run: npm run cypress:open
         - name: E2E tests
           uses: cypress-io/github-action@v5
           with:
