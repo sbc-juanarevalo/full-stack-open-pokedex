@@ -15,11 +15,11 @@ jobs:
             fetch-depth: 0
         - uses: actions/setup-node@v3
           with:
-            node-version: 18
+            node-version: 16
         - name: Install dependencies
           run: npm install --no-audit --no-fund --no-optional
         - name: Arreglar Error
-          run:  NODE_OPTIONS=--openssl-legacy-provider    
+          run:  export NODE_OPTIONS=--openssl-legacy-provider   
         - name: Lint
           run: npm run eslint        
         - name: Build
