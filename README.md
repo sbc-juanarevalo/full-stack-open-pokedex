@@ -1,3 +1,5 @@
+[![Nombre_Workflow_Deployment_Pipeline](https://github.com/sbc-juanarevalo/full-stack-open-pokedex/actions/workflows/pipeline.yml/badge.svg)](https://github.com/sbc-juanarevalo/full-stack-open-pokedex/actions/workflows/pipeline.yml)
+
 # Full Stack open CI/CD
 
 This repository is used for the CI/CD module of the Full stack open course
