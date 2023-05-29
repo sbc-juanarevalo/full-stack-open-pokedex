@@ -3,7 +3,12 @@ name: Nombre_Workflow_Deployment_Pipeline
 on:
     push:
         branches:
-        - master
+        - master #se puede dejar de cualquiera de las dos forma [master] o - master
+    pull_request:
+      branches: [master]
+      types: [opened, synchronize]
+
+
 jobs:
     Nombre_Trabajo:
         runs-on: ubuntu-20.04
