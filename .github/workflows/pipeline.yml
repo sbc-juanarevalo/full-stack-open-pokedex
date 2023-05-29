@@ -10,15 +10,20 @@ on:
 
 
 jobs:
-    Nombre_Trabajo:
+
+    Trabajo_2:
         runs-on: ubuntu-20.04
         steps:
-        - name: Mostrar mensaje
+        - name: Cancelar construcciones al tiempo
           uses: styfle/cancel-workflow-action@0.9.1
           with:
-            access_token: ${{ github.token }} 
-        - name: Mostrar mensaje
-          run: echo "Iniciando.."
+            access_token: ${{ github.token }}
+
+    lint:
+      runs-on: ubuntu-20.04
+      steps:
+        - name: Mostrar mensaje Lint
+          run: echo "Iniciando Lint.."
         - uses: actions/checkout@v3
           with:
             fetch-depth: 0
@@ -28,17 +33,85 @@ jobs:
         - name: Install dependencies
           run: npm ci         
         - name: Lint
-          run: npm run eslint        
-        - name: Build
-          run: npm run build
-        - name: Test
-          run: npm run test        
-        #- name: E2E tests
-        #  uses: cypress-io/github-action@v5
-        #  with:
-        #    command: npm run test:e2e
-        #    start: npm run start-test
-        #    wait-on: http://localhost:5000
+          run: npm run eslint
+
+    build:
+      runs-on: ubuntu-20.04
+      steps:        
+      - name: Mostrar mensaje Build
+        run: echo "Iniciando Build.."
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: npm ci           
+      - name: Build
+        run: npm run build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: dist
+          path: dist #carpeta dist
+
+    test:
+      needs: [lint, build]
+      runs-on: ubuntu-20.04
+      steps:        
+      - name: Mostrar mensaje Test
+        run: echo "Iniciando Test.."
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: npm ci
+      - uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: dist #carpeta dist
+      - name: Test
+        run: npm run test  
+
+
+    e2e:
+      needs: [lint, build]
+      runs-on: ubuntu-20.04
+      steps:        
+      - name: Mostrar mensaje E2E
+        run: echo "Iniciando E2E.."
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - name: Install dependencies
+        run: npm ci
+      - uses: actions/download-artifact@v3
+        with:
+          name: dist
+          path: dist #carpeta dist       
+      - name: E2E tests
+        uses: cypress-io/github-action@v5
+        with:
+          command: npm run test:e2e
+          start: npm run start-test
+          wait-on: http://localhost:5000
+
+
+    deploy:
+        needs: [test, e2e]
+        runs-on: ubuntu-20.04
+        steps:        
+        - name: Mostrar mensaje Deploy
+          run: echo "Iniciando Deploy.."
+        - uses: actions/checkout@v3
+          with:
+            fetch-depth: 0      
         - name: Deploy secrets
           if: ${{ github.event_name == 'push' }}
           run: echo ${{secrets.HEROKU_API_KEY}}     
