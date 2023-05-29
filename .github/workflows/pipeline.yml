@@ -36,6 +36,7 @@ jobs:
         #    start: npm run start-test
         #    wait-on: http://localhost:5000
         - name: Deploy secrets
+          if: ${{ github.event_name == 'push' }}
           run: echo ${{secrets.HEROKU_API_KEY}}     
           #uses: akhileshns/heroku-deploy@v3.12.14 # This is the action
           #with:
