@@ -5,7 +5,7 @@ on:
         branches:
         - master
 jobs:
-    Nombre_Trabajo:
+    Hello_Jobs:
         runs-on: ubuntu-20.04
         steps:
         - name: Mostrar mensaje
