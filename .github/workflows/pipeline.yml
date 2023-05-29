@@ -11,7 +11,7 @@ on:
 
 jobs:
 
-    Trabajo_2:
+    Comprobacion_cancelar_workflows:
         runs-on: ubuntu-20.04
         steps:
         - name: Cancelar construcciones al tiempo
